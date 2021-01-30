@@ -33,10 +33,8 @@ class ItemAPI(ObjectMultipleModelAPIView):
 
 class OrderItemAPI(ObjectMultipleModelAPIView):
     querylist = [
-        {'queryset': Item.objects.all(), 'serializer_class': ItemSerializer},
         {'queryset': OrderItem.objects.all(), 'serializer_class': OrderItemSerializer},
         {'queryset': Order.objects.all(), 'serializer_class': OrderSerializer},
-        {'queryset': User.objects.all(), 'serializer_class': UserSerializer}
     ]
 
 
