@@ -5,19 +5,26 @@ from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
 from rest_framework.views import APIView
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from drf_multiple_model.views import ObjectMultipleModelAPIView, FlatMultipleModelAPIView
 from .serializers import ItemSerializer, OrderItemSerializer, OrderSerializer, OrderItemUpdateSerializer, UserSerializer
 from django.contrib import messages
 from django.utils import timezone
+from rest_framework.authtoken.models import Token
 
 
 class UserAPI(generics.ListAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
+    def get_token(self):
+        for user in User.objects.all():
+            tokens = Token.objects.get_or_create(user=user)
+            tokens.save()
+
 
 class ItemAPI(ObjectMultipleModelAPIView):
+    permission_classes = (AllowAny,)
     querylist = [
         {'queryset': Item.objects.all(), 'serializer_class': ItemSerializer},
         {'queryset': User.objects.all(), 'serializer_class': UserSerializer},

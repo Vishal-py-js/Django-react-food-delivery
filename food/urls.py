@@ -1,4 +1,5 @@
 from django.urls import path
+from rest_framework.authtoken import views
 from .views import *
 
 
@@ -9,4 +10,5 @@ urlpatterns = [
     path('add-to-cart/', AddToCartAPI.as_view(), name='add'),
     path('cart/<str:pk>/', OrderItemUpdateAPI.as_view(), name='update'),
     path('order/', OrderAPI.as_view()),
+    path('api-token-auth/', views.obtain_auth_token),
 ]
