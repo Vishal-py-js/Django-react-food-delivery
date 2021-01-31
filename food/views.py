@@ -3,17 +3,29 @@ from .models import UserProfile, Item, OrderItem, Order
 from django.contrib.auth.models import User
 from rest_framework import generics
 from rest_framework.response import Response
-from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
+from rest_framework.status import HTTP_201_CREATED, HTTP_200_OK, HTTP_400_BAD_REQUEST
 from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from drf_multiple_model.views import ObjectMultipleModelAPIView, FlatMultipleModelAPIView
-from .serializers import ItemSerializer, OrderItemSerializer, OrderSerializer, OrderItemUpdateSerializer, UserSerializer
+from .serializers import RegisterSerializer, ItemSerializer, OrderItemSerializer, OrderSerializer, OrderItemUpdateSerializer, UserSerializer
 from django.contrib import messages
 from django.utils import timezone
 from rest_framework.authtoken.models import Token
 
 
-class UserAPI(generics.ListAPIView):
+class RegisterView(generics.CreateAPIView):
+    queryset = User.objects.all()
+    permission_classes = (AllowAny,)
+    serializer_class = RegisterSerializer
+
+    # def register(self, request):
+    #     queryset = UserProfile.objects.all()
+    #     permission_classes = (AllowAny,)
+    #     serializer_class = RegisterSerializer
+    #     return Response(status=HTTP_201_CREATED)
+    
+
+class UserAPI(generics.ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
