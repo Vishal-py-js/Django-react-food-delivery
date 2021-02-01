@@ -28,9 +28,12 @@ class OrderItemFilterAPI(generics.ListAPIView):
         return OrderItem.objects.filter(user=self.request.user.id)
 
 
-class UserAPI(generics.ListCreateAPIView):
-    queryset = User.objects.all()
+class UserAPI(generics.ListAPIView):
+    model = User
     serializer_class = UserSerializer
+
+    def get_queryset(self):
+        return User.objects.filter(id=self.request.user.id)
 
     def get_token(self):
         for user in User.objects.all():
