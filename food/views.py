@@ -11,6 +11,7 @@ from .serializers import RegisterSerializer, ItemSerializer, OrderItemSerializer
 from django.contrib import messages
 from django.utils import timezone
 from rest_framework.authtoken.models import Token
+from rest_framework.decorators import api_view
 
 
 class RegisterView(generics.CreateAPIView):
@@ -18,12 +19,14 @@ class RegisterView(generics.CreateAPIView):
     permission_classes = (AllowAny,)
     serializer_class = RegisterSerializer
 
-    # def register(self, request):
-    #     queryset = UserProfile.objects.all()
-    #     permission_classes = (AllowAny,)
-    #     serializer_class = RegisterSerializer
-    #     return Response(status=HTTP_201_CREATED)
-    
+
+class OrderItemFilterAPI(generics.ListAPIView):
+    model = OrderItem
+    serializer_class = OrderItemSerializer
+
+    def get_queryset(self):
+        return OrderItem.objects.filter(user=self.request.user.id)
+
 
 class UserAPI(generics.ListCreateAPIView):
     queryset = User.objects.all()
@@ -40,14 +43,15 @@ class ItemAPI(ObjectMultipleModelAPIView):
     querylist = [
         {'queryset': Item.objects.all(), 'serializer_class': ItemSerializer},
         {'queryset': User.objects.all(), 'serializer_class': UserSerializer},
-    ] 
-
-
-class OrderItemAPI(ObjectMultipleModelAPIView):
-    querylist = [
-        {'queryset': OrderItem.objects.all(), 'serializer_class': OrderItemSerializer},
-        {'queryset': Order.objects.all(), 'serializer_class': OrderSerializer},
     ]
+
+
+# class OrderItemAPI (ObjectMultipleModelAPIView):
+
+#     querylist = [
+#         {'queryset': OrderItem.objects.all(), 'serializer_class': OrderItemSerializer},
+#         {'queryset': Order.objects.all(), 'serializer_class': OrderSerializer},
+#     ]
 
 
 class OrderItemUpdateAPI(generics.RetrieveUpdateDestroyAPIView):
