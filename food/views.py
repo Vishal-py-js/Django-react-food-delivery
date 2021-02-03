@@ -9,7 +9,6 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from drf_multiple_model.views import ObjectMultipleModelAPIView
 from .serializers import RegisterSerializer, ItemSerializer, OrderItemSerializer, OrderSerializer, OrderItemUpdateSerializer, UserSerializer
 from django.utils import timezone
-from rest_framework.authtoken.models import Token
 
 
 class RegisterView(generics.CreateAPIView):
