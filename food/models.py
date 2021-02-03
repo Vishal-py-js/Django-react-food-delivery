@@ -1,8 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.conf import settings
 from django.shortcuts import reverse
-from rest_framework.authtoken.models import Token
 
 
 class UserProfile(models.Model):

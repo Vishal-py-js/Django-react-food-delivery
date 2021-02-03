@@ -8,7 +8,6 @@ urlpatterns = [
     path('register/', RegisterView.as_view(), name='register'),
     path('order-items/', OrderItemFilterAPI.as_view(), name='order-items'),
     path('users/', UserAPI.as_view(), name='users'),
-    # path('cart/', OrderItemAPI.as_view(), name='cart'),
     path('add-to-cart/', AddToCartAPI.as_view(), name='add'),
     path('cart/<str:pk>/', OrderItemUpdateAPI.as_view(), name='update'),
     path('order/', OrderAPI.as_view()),

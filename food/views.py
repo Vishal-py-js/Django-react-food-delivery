@@ -6,12 +6,10 @@ from rest_framework.response import Response
 from rest_framework.status import HTTP_201_CREATED, HTTP_200_OK, HTTP_400_BAD_REQUEST
 from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny, IsAuthenticated
-from drf_multiple_model.views import ObjectMultipleModelAPIView, FlatMultipleModelAPIView
+from drf_multiple_model.views import ObjectMultipleModelAPIView
 from .serializers import RegisterSerializer, ItemSerializer, OrderItemSerializer, OrderSerializer, OrderItemUpdateSerializer, UserSerializer
-from django.contrib import messages
 from django.utils import timezone
 from rest_framework.authtoken.models import Token
-from rest_framework.decorators import api_view
 
 
 class RegisterView(generics.CreateAPIView):
@@ -35,10 +33,10 @@ class UserAPI(generics.ListAPIView):
     def get_queryset(self):
         return User.objects.filter(id=self.request.user.id)
 
-    def get_token(self):
-        for user in User.objects.all():
-            tokens = Token.objects.get_or_create(user=user)
-            tokens.save()
+    # def get_token(self):
+    #     for user in User.objects.all():
+    #         tokens = Token.objects.get_or_create(user=user)
+    #         tokens.save()
 
 
 class ItemAPI(ObjectMultipleModelAPIView):
