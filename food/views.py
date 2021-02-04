@@ -32,11 +32,6 @@ class UserAPI(generics.ListAPIView):
     def get_queryset(self):
         return User.objects.filter(id=self.request.user.id)
 
-    # def get_token(self):
-    #     for user in User.objects.all():
-    #         tokens = Token.objects.get_or_create(user=user)
-    #         tokens.save()
-
 
 class ItemAPI(ObjectMultipleModelAPIView):
     permission_classes = (AllowAny,)
@@ -44,14 +39,6 @@ class ItemAPI(ObjectMultipleModelAPIView):
         {'queryset': Item.objects.all(), 'serializer_class': ItemSerializer},
         {'queryset': User.objects.all(), 'serializer_class': UserSerializer},
     ]
-
-
-# class OrderItemAPI (ObjectMultipleModelAPIView):
-
-#     querylist = [
-#         {'queryset': OrderItem.objects.all(), 'serializer_class': OrderItemSerializer},
-#         {'queryset': Order.objects.all(), 'serializer_class': OrderSerializer},
-#     ]
 
 
 class OrderItemUpdateAPI(generics.RetrieveUpdateDestroyAPIView):

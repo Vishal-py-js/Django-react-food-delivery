@@ -32,6 +32,12 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ('id', 'username')
 
 
+class FoodSectionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FoodSection
+        fields = '__all__'
+
+
 class ItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = Item

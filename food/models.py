@@ -11,7 +11,16 @@ class UserProfile(models.Model):
         return self.user.username
 
 
+class FoodSection(models.Model):
+    item_category = models.CharField(max_length=30)
+
+    def __str__(self):
+        return self.item_category
+
+
 class Item(models.Model):
+    food_section = models.ForeignKey(
+        FoodSection, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     price = models.FloatField()
     slug = models.SlugField()
