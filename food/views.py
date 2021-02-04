@@ -47,6 +47,15 @@ class FoodSectionAPI(generics.ListAPIView):
     queryset = FoodSection.objects.all()
 
 
+class ItemFilterAPI(generics.ListAPIView):
+    model = Item
+    serializer_class = ItemSerializer
+    permission_classes = (AllowAny,)
+
+    def get_queryset(self):
+        return Item.objects.filter(food_section=4)
+
+
 class OrderItemUpdateAPI(generics.RetrieveUpdateDestroyAPIView):
     queryset = OrderItem.objects.all()
     serializer_class = OrderItemUpdateSerializer
