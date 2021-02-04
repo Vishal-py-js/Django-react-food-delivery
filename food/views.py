@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import UserProfile, Item, OrderItem, Order
+from .models import UserProfile, Item, OrderItem, Order, FoodSection
 from django.contrib.auth.models import User
 from rest_framework import generics
 from rest_framework.response import Response
@@ -7,7 +7,7 @@ from rest_framework.status import HTTP_201_CREATED, HTTP_200_OK, HTTP_400_BAD_RE
 from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from drf_multiple_model.views import ObjectMultipleModelAPIView
-from .serializers import RegisterSerializer, ItemSerializer, OrderItemSerializer, OrderSerializer, OrderItemUpdateSerializer, UserSerializer
+from .serializers import RegisterSerializer, ItemSerializer, OrderItemSerializer, OrderSerializer, OrderItemUpdateSerializer, UserSerializer, FoodSectionSerializer
 from django.utils import timezone
 
 
@@ -39,6 +39,12 @@ class ItemAPI(ObjectMultipleModelAPIView):
         {'queryset': Item.objects.all(), 'serializer_class': ItemSerializer},
         {'queryset': User.objects.all(), 'serializer_class': UserSerializer},
     ]
+
+class FoodSectionAPI(generics.ListAPIView):
+    model = FoodSection
+    permission_classes = (AllowAny,)
+    serializer_class = FoodSectionSerializer
+    queryset = FoodSection.objects.all()
 
 
 class OrderItemUpdateAPI(generics.RetrieveUpdateDestroyAPIView):
