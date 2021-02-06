@@ -9,6 +9,7 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from drf_multiple_model.views import ObjectMultipleModelAPIView
 from .serializers import RegisterSerializer, ItemSerializer, OrderItemSerializer, OrderSerializer, OrderItemUpdateSerializer, UserSerializer, FoodSectionSerializer
 from django.utils import timezone
+from rest_framework.decorators import api_view
 
 
 class RegisterView(generics.CreateAPIView):
@@ -52,8 +53,10 @@ class ItemFilterAPI(generics.ListAPIView):
     serializer_class = ItemSerializer
     permission_classes = (AllowAny,)
 
+    # @api_view(['GET', 'POST'])
     def get_queryset(self):
-        return Item.objects.filter(food_section=4)
+        id = self.request.data.get('id')
+        return Item.objects.filter(food_section=id)
 
 
 class OrderItemUpdateAPI(generics.RetrieveUpdateDestroyAPIView):
