@@ -9,7 +9,7 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from drf_multiple_model.views import ObjectMultipleModelAPIView
 from .serializers import RegisterSerializer, ItemSerializer, OrderItemSerializer, OrderSerializer, OrderItemUpdateSerializer, UserSerializer, FoodSectionSerializer
 from django.utils import timezone
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 
 
 class RegisterView(generics.CreateAPIView):
@@ -48,15 +48,24 @@ class FoodSectionAPI(generics.ListAPIView):
     queryset = FoodSection.objects.all()
 
 
-class ItemFilterAPI(generics.ListAPIView):
-    model = Item
-    serializer_class = ItemSerializer
-    permission_classes = (AllowAny,)
+# class ItemFilterAPI(APIView):
+#     model = Item
+#     serializer_class = ItemSerializer
+#     permission_classes = (AllowAny,)
 
-    # @api_view(['GET', 'POST'])
-    def get_queryset(self):
-        id = self.request.data.get('id')
-        return Item.objects.filter(food_section=id)
+#     @api_view(['GET', 'POST'])
+#     def get_queryset(self):
+#         id = self.request.data.get('id')
+#         return Item.objects.filter(food_section=id)
+
+
+@api_view(['GET', 'POST'])
+@permission_classes((AllowAny,))
+def FilterAPI(request, *args, **kwargs):
+    id = request.data.get('id')
+    items = Item.objects.filter(food_section=id)
+    serializer = ItemSerializer(items, many=True)
+    return Response(serializer.data)
 
 
 class OrderItemUpdateAPI(generics.RetrieveUpdateDestroyAPIView):
