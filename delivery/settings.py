@@ -26,7 +26,7 @@ SECRET_KEY = 'm(1+xa&q9h0$l!qy3sm^7%hmnwcxjs@2^2nn06vz267rj66f1*'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['fullstackecom.herokuapp.com']
 
 
 # Application definition
@@ -60,6 +60,7 @@ CORS_ORIGIN_ALLOW_ALL = True
 
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',
+    'https://fullstackecom.herokuapp.com'
 ]
 
 ROOT_URLCONF = 'delivery.urls'
