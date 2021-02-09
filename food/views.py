@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import UserProfile, Item, OrderItem, Order, FoodSection
+from .models import Item, OrderItem, Order, ClothSection
 from django.contrib.auth.models import User
 from rest_framework import generics
 from rest_framework.response import Response
@@ -7,7 +7,7 @@ from rest_framework.status import HTTP_201_CREATED, HTTP_200_OK, HTTP_400_BAD_RE
 from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from drf_multiple_model.views import ObjectMultipleModelAPIView
-from .serializers import RegisterSerializer, ItemSerializer, OrderItemSerializer, OrderSerializer, OrderItemUpdateSerializer, UserSerializer, FoodSectionSerializer
+from .serializers import RegisterSerializer, ItemSerializer, OrderItemSerializer, OrderSerializer, OrderItemUpdateSerializer, UserSerializer, ClothSectionSerializer
 from django.utils import timezone
 from rest_framework.decorators import api_view, permission_classes
 
@@ -41,11 +41,11 @@ class ItemAPI(ObjectMultipleModelAPIView):
         {'queryset': User.objects.all(), 'serializer_class': UserSerializer},
     ]
 
-class FoodSectionAPI(generics.ListAPIView):
-    model = FoodSection
+class ClothSectionAPI(generics.ListAPIView):
+    model = ClothSection
     permission_classes = (AllowAny,)
-    serializer_class = FoodSectionSerializer
-    queryset = FoodSection.objects.all()
+    serializer_class = ClothSectionSerializer
+    queryset = ClothSection.objects.all()
 
 
 # class ItemFilterAPI(APIView):
@@ -63,7 +63,7 @@ class FoodSectionAPI(generics.ListAPIView):
 @permission_classes((AllowAny,))
 def FilterAPI(request, *args, **kwargs):
     id = request.data.get('id')
-    items = Item.objects.filter(food_section=id)
+    items = Item.objects.filter(cloth_section=id)
     serializer = ItemSerializer(items, many=True)
     return Response(serializer.data)
 

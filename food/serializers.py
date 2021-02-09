@@ -21,8 +21,6 @@ class RegisterSerializer(serializers.ModelSerializer):
         user = User.objects.create(username=validated_data['username'])
         user.set_password(validated_data['password'])
         user.save()
-        userprofile = UserProfile.objects.create(user=user)
-        userprofile.save()
         return user
 
 
@@ -32,9 +30,9 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ('id', 'username')
 
 
-class FoodSectionSerializer(serializers.ModelSerializer):
+class ClothSectionSerializer(serializers.ModelSerializer):
     class Meta:
-        model = FoodSection
+        model = ClothSection
         fields = '__all__'
 
 

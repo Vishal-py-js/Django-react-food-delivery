@@ -3,15 +3,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import reverse
 
 
-class UserProfile(models.Model):
-    user = models.OneToOneField(
-        User, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.user.username
-
-
-class FoodSection(models.Model):
+class ClothSection(models.Model):
     item_category = models.CharField(max_length=30)
 
     def __str__(self):
@@ -19,8 +11,8 @@ class FoodSection(models.Model):
 
 
 class Item(models.Model):
-    food_section = models.ForeignKey(
-        FoodSection, on_delete=models.CASCADE)
+    cloth_section = models.ForeignKey(
+        ClothSection, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     price = models.FloatField()
     slug = models.SlugField()
