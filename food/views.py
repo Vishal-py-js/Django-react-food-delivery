@@ -48,17 +48,6 @@ class ClothSectionAPI(generics.ListAPIView):
     queryset = ClothSection.objects.all()
 
 
-# class ItemFilterAPI(APIView):
-#     model = Item
-#     serializer_class = ItemSerializer
-#     permission_classes = (AllowAny,)
-
-#     @api_view(['GET', 'POST'])
-#     def get_queryset(self):
-#         id = self.request.data.get('id')
-#         return Item.objects.filter(food_section=id)
-
-
 @api_view(['GET', 'POST'])
 @permission_classes((AllowAny,))
 def FilterAPI(request, *args, **kwargs):
