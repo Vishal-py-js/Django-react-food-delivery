@@ -16,7 +16,7 @@ class Item(models.Model):
     title = models.CharField(max_length=100)
     price = models.FloatField()
     slug = models.SlugField()
-    image = models.ImageField()
+    image = models.ImageField(default='placeholder.jpg', upload_to='images')
 
     def __str__(self):
         return self.title
