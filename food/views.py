@@ -41,6 +41,13 @@ class ItemAPI(ObjectMultipleModelAPIView):
         {'queryset': User.objects.all(), 'serializer_class': UserSerializer},
     ]
 
+# class ItemAPI(generics.ListCreateAPIView):
+#     permission_classes = (AllowAny,)
+#     model = Item
+#     serializer_class = ItemSerializer
+#     queryset = Item.objects.all()
+
+
 class ClothSectionAPI(generics.ListAPIView):
     model = ClothSection
     permission_classes = (AllowAny,)

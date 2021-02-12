@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'food',
+    'food.apps.FoodConfig',
     'rest_framework',
     'rest_framework.authtoken',
     'drf_multiple_model',
@@ -151,7 +151,7 @@ MEDIA_URL = '/media/'
 
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
-AWS_STORAGE_BUCKET_NAME = os.environ.get('ecom-itemimage-bucket')
+AWS_STORAGE_BUCKET_NAME = 'ecom-itemimage-bucket'
 
 AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = None

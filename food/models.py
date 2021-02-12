@@ -15,16 +15,16 @@ class Item(models.Model):
         ClothSection, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     price = models.FloatField()
-    slug = models.SlugField()
-    image = models.ImageField(default='placeholder.jpg', upload_to='images')
+    slug = models.SlugField(blank=True)
+    image = models.ImageField(upload_to='images')
 
     def __str__(self):
         return self.title
 
-    def get_absolute_url(self):
-        return reverse("food:product", kwargs={
-            'slug': self.slug
-        })
+    # def get_absolute_url(self):
+    #     return reverse("food:product", kwargs={
+    #         'slug': self.slug
+    #     })
 
     def get_add_to_cart_url(self):
         return reverse("food:add-to-cart", kwargs={
@@ -50,7 +50,7 @@ class OrderItem(models.Model):
     def get_total(self):
         total = self.item.price * self.quantity
         return total
-    
+
     @property
     def get_slug(self):
         slug = self.item.slug
