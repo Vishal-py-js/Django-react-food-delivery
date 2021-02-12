@@ -21,7 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'm(1+xa&q9h0$l!qy3sm^7%hmnwcxjs@2^2nn06vz267rj66f1*'
+SECRET_KEY = '*******************************************'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -151,7 +151,7 @@ MEDIA_URL = '/media/'
 
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
-AWS_STORAGE_BUCKET_NAME = 'ecom-itemimage-bucket'
+AWS_STORAGE_BUCKET_NAME = '*****************'
 
 AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = None
