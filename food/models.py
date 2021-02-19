@@ -16,7 +16,7 @@ class Item(models.Model):
     title = models.CharField(max_length=100)
     price = models.FloatField()
     slug = models.SlugField(blank=True)
-    image = models.ImageField(upload_to='images')
+    image = models.ImageField(default='placeholder.jpg', upload_to='images')
 
     def __str__(self):
         return self.title
@@ -72,3 +72,9 @@ class Order(models.Model):
         orderitems = self.items_set.all()
         total = sum([item.quantity for item in orderitems])
         return total
+
+class ShippingAddress(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    address = models.CharField(max_length=50)
+    city = models.CharField(max_length=30)
+    state = models.CharField(max_length=20)
