@@ -14,4 +14,5 @@ urlpatterns = [
     path('cart/<str:pk>/', OrderItemUpdateAPI.as_view(), name='update'),
     path('order/', OrderAPI.as_view()),
     path('api-token-auth/', views.obtain_auth_token),
+    path('address/', ShippingAdrressAPI.as_view()),
 ]

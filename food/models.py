@@ -74,7 +74,7 @@ class Order(models.Model):
         return total
 
 class ShippingAddress(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     address = models.CharField(max_length=50)
     city = models.CharField(max_length=30)
     state = models.CharField(max_length=20)
