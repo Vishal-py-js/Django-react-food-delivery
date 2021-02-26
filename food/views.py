@@ -73,6 +73,7 @@ class ShippingAdrressAPI(generics.ListCreateAPIView):
     serializer_class = ShippingAddressSerializer
     queryset = ShippingAddress.objects.all()
 
+
 class AddToCartAPI(APIView):
 
     def post(self, request, *args, **kwargs):
