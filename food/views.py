@@ -69,9 +69,12 @@ class OrderAPI(generics.ListAPIView):
 
 
 class ShippingAdrressAPI(generics.ListCreateAPIView):
+    model = ShippingAddress
     permission_classes = (IsAuthenticated,)
     serializer_class = ShippingAddressSerializer
-    queryset = ShippingAddress.objects.all()
+
+    def get_queryset(self):
+        return ShippingAddress.objects.filter(user=self.request.user.id)
 
 
 class AddToCartAPI(APIView):
